@@ -15,9 +15,11 @@ public class MeetMockController {
     public final HashMap <String,Infos> infosMap = new HashMap<>();
     public final HashMap <String,AgifyData> agifyMap = new HashMap<>();
     public final AgifyClient agifyClient;
+    public final CreateMatches createMatches;
 
-    public MeetMockController(AgifyClient agifyClient) {
+    public MeetMockController(AgifyClient agifyClient, CreateMatches createMatches) {
         this.agifyClient = agifyClient;
+        this.createMatches = createMatches;
     }
 
 
@@ -26,16 +28,13 @@ public class MeetMockController {
         Response<AgifyData> response = agifyClient.defineAge(infos.name, infos.pays).execute();
         AgifyData agifyData = response.body();
         agifyMap.put(agifyData.name,agifyData);
-        System.out.println(agifyMap);
+        //System.out.println(agifyMap);
         infosMap.put(infos.name, infos);
     }
 
     @GetMapping("/api/matches")
     public List<Infos> matchesUser(@RequestParam(value="userName") String name){
-        final List<Infos> listUser = new ArrayList<>();
-        for(Infos infos: infosMap.values()){
-            listUser.add(infos);
-        }
+        final List<Infos> listUser = createMatches.getMatches(infosMap, agifyMap,name);
         return listUser;
     }
 }

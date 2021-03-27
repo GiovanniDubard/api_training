@@ -11,12 +11,9 @@ public class Infos {
     public final String sexe;
     public final String sexPref;
 
-    public Infos(@JsonProperty("userEmail") String email,
-                    @JsonProperty("userName") String prenom,
-                    @JsonProperty("userTweeter") String twitter,
-                    @JsonProperty("userCountry") String pays,
-                    @JsonProperty("userSex") String sexe,
-                    @JsonProperty("userSexPref") String userSexPref) {
+    public Infos(@JsonProperty("userEmail") String email, @JsonProperty("userName") String prenom,
+                    @JsonProperty("userTweeter") String twitter, @JsonProperty("userCountry") String pays,
+                    @JsonProperty("userSex") String sexe, @JsonProperty("userSexPref") String userSexPref) {
         this.email = email;
         this.name = prenom;
         this.twitter = twitter;
