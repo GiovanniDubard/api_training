@@ -25,11 +25,13 @@ public class MeetMockController {
 
     @PostMapping("/api/inscription")
     public void inscription(@RequestBody Infos infos) throws IOException {
-        Response<AgifyData> response = agifyClient.defineAge(infos.name, infos.pays).execute();
-        AgifyData agifyData = response.body();
-        agifyMap.put(agifyData.name,agifyData);
-        //System.out.println(agifyMap);
-        infosMap.put(infos.name, infos);
+        if (!agifyMap.containsKey(infos.name)) {
+            Response<AgifyData> response = agifyClient.defineAge(infos.name, infos.pays).execute();
+            AgifyData agifyData = response.body();
+            agifyMap.put(agifyData.name, agifyData);
+            infosMap.put(infos.name,infos);
+            //System.out.println(agifyMap);
+        }
     }
 
     @GetMapping("/api/matches")
@@ -38,3 +40,4 @@ public class MeetMockController {
         return listUser;
     }
 }
+
