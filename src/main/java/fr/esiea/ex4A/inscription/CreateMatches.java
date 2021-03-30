@@ -13,7 +13,7 @@ public class CreateMatches {
         for(AgifyData i : agifyMap.values()){
             if(i.age<= userAgify.age+4 && i.age>= userAgify.age-4){
                 Infos potentialMatch = userMap.get(i.name);
-                if(potentialMatch.sexe.equals(infos.sexPref) && infos.twitter!= potentialMatch.twitter && infos.name!=potentialMatch.name){ matches.add(userMap.get(i.name)); }
+                if(potentialMatch.sexe.equals(infos.sexPref) && potentialMatch.pays.equals(infos.pays) && infos.twitter!= potentialMatch.twitter){ matches.add(userMap.get(i.name)); }
             }
         }
         return matches;
